@@ -119,8 +119,35 @@
   cursor: pointer;
   color: #e23baa;
 }
+.registration-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #f797d7;
+            border-radius: 5px;
+        }
+
+        .error-messages {
+            color: red;
+            margin-top: 10px;
+        }
     </style>
 </head>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: transparent; height: 2000px; width: 2000px; position: fixed;"></button>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4CAF50;">
         <a class="navbar-brand" href="#">Эдемов сад</a>
@@ -151,6 +178,68 @@
     </nav>
   </header>
 	<body>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exampleModalLabel">Регистрация</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="registration-form">
+                <form id="registerForm">
+                    <label for="username">Логин (уникальный):</label>
+                    <input type="text" id="username" name="username" required>
+        
+                    <label for="password">Пароль (не менее 6 символов):</label>
+                    <input type="password" id="password" name="password" required>
+        
+                    <label for="fullname">ФИО:</label>
+                    <input type="text" id="fullname" name="fullname" required>
+        
+                    <label for="phone">Телефон (формат +7(XXX)-XXX-XX-XX):</label>
+                    <input type="text" id="phone" name="phone" required>
+        
+                    <label for="email">Электронная почта:</label>
+                    <input type="email" id="email" name="email" required>
+        
+                    <button type="submit" id="button1" class="btn btn-primary btn-block" style="margin-bottom: 20px;">Зарегистрироваться</button>
+                    <center><button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" style="color: blue; background-color: transparent;">Есть аккаунт</button></center>
+                </form>
+                <div id="errorMessages" class="error-messages"></div>
+            </div>       
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exampleModalToggleLabel2">Авторизация</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="registration-form">
+                <form id="registerForm">
+                    <label for="username">Логин:</label>
+                    <input type="text" id="username-log" name="username" required>
+        
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password-log" name="password" required>
+        
+                    <button type="submit" class="btn btn-primary btn-block" onclick="LogVer()" style="margin-bottom: 20px ;">Авторизация</button>
+                </form>
+                <div id="errorMessages" class="error-messages"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
     
 		
@@ -306,11 +395,24 @@
                 this.className += " active";
               });
             }</script>
-            
-            <h1 id="cy">Абоба</h1>
 
-<script>
-  cy.get('button').trigger('mousedown', 'topRight')
-</script>
+             <script>
+                function LogVer() {
+                    var user = document.getElementById("username-log");
+                    var pass = document.getElementById("password-log");
+                    document.write(user);
+                    if (user.value == "admin" && pass.value == "123123") {
+                    alert('Добро пожаловать в систему');
+                    window.location.href = 'profile.html';
+                }
+                else {
+                    alert('Отказано в доступе')
+                    window.location.href = 'log.html'
+                }
+    } 
+            
+                </script>
+                <script src="singup.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
