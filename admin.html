@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора - Мир цветов</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white !important;
+        }
+
+        .hero {
+            background-image: url('https://example.com/hero-image.jpg');
+            background-size: cover;
+            height: 200px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        h1,
+        h2,
+        h4 {
+            font-family: 'Georgia', serif;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .product-card {
+            margin-bottom: 50px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #4A4A4A;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #E91E63;
+            font-weight: bold;
+        }
+
+        .btn-lavender {
+            background-color: #f797d7;
+            color: #FFFFFF;
+        }
+
+        .footer {
+            background-color: #4CAF50;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer h5 {
+            font-family: 'Georgia', serif;
+            color: white;
+            margin-top: 0;
+        }
+
+        .footer p {
+            color: white;
+        }
+
+        .container {
+            overflow: hidden;
+        }
+
+        .filterDiv {
+            float: left;
+            background-color: #2196F3;
+            color: #ffffff;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 2px;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #4CAF50;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn:hover {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #4CAF50;
+            cursor: pointer;
+            color: #e23baa;
+        }
+
+        .registration-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #f797d7;
+            border-radius: 5px;
+        }
+
+        .error-messages {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Мир цветов - Панель администратора</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Заказы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Товары</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="logoutBtn">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Панель администратора</h1>
+    </div>
+
+    <div class="container mt-5">
+        <div id="loginForm" class="registration-form">
+            <h2>Вход</h2>
+            <label for="loginUsername">Логин:</label>
+            <input type="text" id="loginUsername" name="loginUsername" required>
+
+            <label for="loginPassword">Пароль:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+
+            <button type="button" class="btn btn-lavender" onclick="login()">Войти</button>
+            <div class="error-messages" id="loginErrorMessages"></div>
+        </div>
+
+        <div id="adminPanel" style="display: none;">
+            <h2>Заказы</h2>
+            <div class="mb-3">
+                <label for="orderStatusFilter">Фильтр по статусу:</label>
+                <select id="orderStatusFilter" class="form-control">
+                    <option value="all">Все</option>
+                    <option value="new">Новый</option>
+                    <option value="in_progress">В работе</option>
+                    <option value="completed">Выполнено</option>
+                    <option value="canceled">Отменено</option>
+                </select>
+            </div>
+            <div id="orders">
+                <!-- Заказы будут заполняться динамически -->
+            </div>
+
+            <h2>Товары</h2>
+            <button type="button" class="btn btn-lavender mb-3" data-toggle="modal" data-target="#createProductModal">Создать товар</button>
+            <div id="products">
+                <!-- Товары будут заполняться динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для создания товара -->
+    <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createProductModalLabel">Создать товар</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createProductForm">
+                        <label for="productName">Наименование товара:</label>
+                        <input type="text" id="productName" name="productName" required>
+
+                        <label for="productQuantity">Количество товара:</label>
+                        <input type="number" id="productQuantity" name="productQuantity" required>
+
+                        <label for="productCategory">Категория товара:</label>
+                        <input type="text" id="productCategory" name="productCategory" required>
+
+                        <label for="productImage">Фото товара:</label>
+                        <input type="file" id="productImage" name="productImage" accept=".jpg, .jpeg, .png" required>
+
+                        <label for="productPrice">Цена:</label>
+                        <input type="number" id="productPrice" name="productPrice" required>
+
+                        <label for="productCountry">Страна производитель:</label>
+                        <input type="text" id="productCountry" name="productCountry" required>
+
+                        <label for="productColor">Цвет:</label>
+                        <input type="text" id="productColor" name="productColor" required>
+
+                        <button type="submit" class="btn btn-lavender">Создать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для редактирования товара -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Редактировать товар</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm">
+                        <input type="hidden" id="editProductId" name="editProductId">
+
+                        <label for="editProductName">Наименование товара:</label>
+                        <input type="text" id="editProductName" name="editProductName" required>
+
+                        <label for="editProductQuantity">Количество товара:</label>
+                        <input type="number" id="editProductQuantity" name="editProductQuantity" required>
+
+                        <label for="editProductCategory">Категория товара:</label>
+                        <input type="text" id="editProductCategory" name="editProductCategory" required>
+
+                        <label for="editProductImage">Фото товара:</label>
+                        <input type="file" id="editProductImage" name="editProductImage" accept=".jpg, .jpeg, .png">
+
+                        <label for="editProductPrice">Цена:</label>
+                        <input type="number" id="editProductPrice" name="editProductPrice" required>
+
+                        <label for="editProductCountry">Страна производитель:</label>
+                        <input type="text" id="editProductCountry" name="editProductCountry" required>
+
+                        <label for="editProductColor">Цвет:</label>
+                        <input type="text" id="editProductColor" name="editProductColor" required>
+
+                        <button type="submit" class="btn btn-lavender">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <h5>Контакты</h5>
+        <p>Адрес: ул. Примерная, д. 1, г. Примерск</p>
+        <p>Телефон: +7 (123) 456-78-90</p>
+        <p>Email: info@mir-tsvetov.ru</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Пример данных для заказов и товаров
+        const orders = [
+            { id: 1, timestamp: '2023-10-01T10:00:00Z', name: 'Иван Иванов', address: 'ул. Примерная, д. 1', phone: '+7(123)456-78-90', date: '2023-10-05', time: '14:00', items: [{ name: 'Роза', quantity: 2 }], status: 'Новый', payment: 'Наличные' },
+            { id: 2, timestamp: '2023-10-02T11:00:00Z', name: 'Анна Петрова', address: 'ул. Примерная, д. 2', phone: '+7(123)456-78-91', date: '2023-10-06', time: '15:00', items: [{ name: 'Тюльпан', quantity: 1 }], status: 'В работе', payment: 'Банковская карта' }
+        ];
+
+      

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Мир цветов</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white !important;
+        }
+
+        .hero {
+            background-image: url('https://example.com/hero-image.jpg');
+            background-size: cover;
+            height: 400px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        h1,
+        h2,
+        h4 {
+            font-family: 'Georgia', serif;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .product-card {
+            margin-bottom: 50px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #4A4A4A;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #E91E63;
+            font-weight: bold;
+        }
+
+        .btn-lavender {
+            background-color: #f797d7;
+            color: #FFFFFF;
+        }
+
+        .footer {
+            background-color: #4CAF50;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer h5 {
+            font-family: 'Georgia', serif;
+            color: white;
+            margin-top: 0;
+        }
+
+        .footer p {
+            color: white;
+        }
+
+        .container {
+            overflow: hidden;
+        }
+
+        .filterDiv {
+            float: left;
+            background-color: #2196F3;
+            color: #ffffff;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 2px;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #4CAF50;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn:hover {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #4CAF50;
+            cursor: pointer;
+            color: #e23baa;
+        }
+
+        .registration-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #f797d7;
+            border-radius: 5px;
+        }
+
+        .error-messages {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Мир цветов</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Каталог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Корзина</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Личный кабинет</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Личный кабинет</h1>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Корзина</h2>
+        <div id="cart">
+            <!-- Корзина будет заполняться динамически -->
+        </div>
+
+        <h2>Мои заказы</h2>
+        <div id="orders">
+            <!-- Заказы будут заполняться динамически -->
+        </div>
+
+        <h2>Оформление заказа</h2>
+        <form id="orderForm" class="registration-form">
+            <label for="address">Адрес:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="phone">Телефон:</label>
+            <input type="text" id="phone" name="phone" pattern="\+7\([0-9]{3}\)-[0-9]{3}-[0-9]{2}-[0-9]{2}" required>
+
+            <label for="date">Дата получения:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Время получения:</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="payment">Тип оплаты:</label>
+            <select id="payment" name="payment" required>
+                <option value="cash">Наличные</option>
+                <option value="card">Банковская карта</option>
+            </select>
+
+            <button type="submit" class="btn btn-lavender">Сформировать заказ</button>
+            <div class="error-messages" id="errorMessages"></div>
+        </form>
+    </div>
+
+    <footer class="footer mt-5">
+        <h5>Контакты</h5>
+        <p>Адрес: ул. Примерная, д. 1, г. Примерск</p>
+        <p>Телефон: +7 (123) 456-78-90</p>
+        <p>Email: info@mir-tsvetov.ru</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Пример данных для корзины и заказов
+        const cartItems = [
+            { id: 1, name: 'Роза', price: 50, quantity: 2, maxQuantity: 5 },
+            { id: 2, name: 'Тюльпан', price: 30, quantity: 1, maxQuantity: 3 }
+        ];
+
+        const orders = [
+            { id: 1, items: [{ name: 'Роза', quantity: 2 }], status: 'В обработке' },
+            { id: 2, items: [{ name: 'Тюльпан', quantity: 1 }], status: 'Доставлен' }
+        ];
+
+        // Отображение корзины
+        function displayCart() {
+            const cartContainer = $('#cart');
+            cartContainer.empty();
+            cartItems.forEach(item => {
+                const itemDiv = `
+                    <div class="card product-card">
+                        <div class="card-body">
+                            <h5 class="card-title">${item.name}</h5>
+                            <p class="card-text">Цена: <strong>${item.price}</strong> руб.</p>
+                            <p class="card-text">Количество: <strong>${item.quantity}</strong></p>
+                            <button class="btn btn-lavender" onclick="addToCart(${item.id})">+</button>
+                            <button class="btn btn-lavender" onclick="removeFromCart(${item.id})">-</button>
+                        </div>
+                    </div>
+                `;
+                cartContainer.append(itemDiv);
+            });
+        }
+
+        // Отображение заказов
+        function displayOrders() {
+            const ordersContainer = $('#orders');
+            ordersContainer.empty();
+            orders.forEach(order => {
+                const orderDiv = `
+                    <div class="card product-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Заказ #${order.id}</h5>
+                            <p class="card-text">Статус: <strong>${order.status}</strong></p>
+                            <p class="card-text">Товары:</p>
+                            <ul>
+                                ${order.items.map(item => `<li>${item.name} x ${item.quantity}</li>`).join('')}
+                            </ul>
+                            <button class="btn btn-lavender" onclick="deleteOrder(${order.id})">Удалить</button>
+                        </div>
+                    </div>
+                `;
+                ordersContainer.append(orderDiv);
+            });
+        }
+
+        // Добавление товара в корзину
+        function addToCart(itemId) {
+            const item = cartItems.find(i => i.id === itemId);
+            if (item.quantity < item.maxQuantity) {
+                item.quantity++;
+                displayCart();
+            } else {
+                alert('Нельзя добавить больше товаров, чем есть в наличии.');
+            }
+        }
+
+        // Удаление товара из корзины
+        function removeFromCart(itemId) {
+            const item = cartItems.find(i => i.id === itemId);
+            if (item.quantity > 0) {
+                item.quantity--;
+                displayCart();
+            }
+        }
+
+        // Удаление заказа
+        function deleteOrder(orderId) {
+            const index = orders.findIndex(order => order.id === orderId);
+            if (index !== -1) {
+                orders.splice(index, 1);
+                displayOrders();
+            }
+        }
+
+        // Обработка формы оформления заказа
+        $('#orderForm').submit(function (e) {
+            e.preventDefault();
+            const errorMessages = $('#errorMessages');
+            errorMessages.empty();
+
+            const address = $('#address').val();
+            const phone = $('#phone').val();
+            const date = $('#date').val();
+            const time = $('#time').val();
+            const payment = $('#payment').val();
+
+            if (!address || !phone || !date || !time || !payment) {
+                errorMessages.text('Все поля обязательны для заполнения.');
+                return;
+            }
+
+            alert('Заказ успешно сформирован!');
+            // Здесь можно добавить логику для отправки заказа на сервер
+        });
+
+        // Инициализация
+        displayCart();
+        displayOrders();
+    </script>
+</body>
+
+</html>
